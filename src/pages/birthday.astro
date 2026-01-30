@@ -1,0 +1,40 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Gallery from '../components/Gallery.astro';
+import { t } from '../data/i18n';
+import { getBirthdayServiceJsonLd } from '../data/structuredData';
+import birthdayPhotos from '../data/birthday.json';
+
+const lang = 'es';
+const seo = { title: t(lang, 'seo.birthday.title'), description: t(lang, 'seo.birthday.description') };
+const canonicalUrl = 'https://ponyexpressmallorca.com/birthday';
+const extraJsonLd = [getBirthdayServiceJsonLd(lang, canonicalUrl)];
+---
+<BaseLayout lang={lang} title={seo.title} description={seo.description} currentPath="/birthday" extraJsonLd={extraJsonLd}>
+  <section class="relative py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-turquoise/10 to-white">
+    <div class="max-w-4xl mx-auto text-center">
+      <p class="text-sm font-semibold text-turquoise uppercase tracking-widest mb-3">{t(lang, 'birthday.title')}</p>
+      <h1 class="text-4xl md:text-6xl font-bold text-ink tracking-tight leading-tight">
+        {lang === 'es' ? 'Cumpleaños con ponis' : 'Birthdays with ponies'}<br /><span class="text-lime">Pony Express Mallorca</span>
+      </h1>
+      <p class="mt-6 text-lg md:text-xl text-ink/80 leading-relaxed max-w-2xl mx-auto">{t(lang, 'birthday.heading')}</p>
+    </div>
+  </section>
+  <section class="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+    <div class="max-w-5xl mx-auto">
+      <dl class="grid md:grid-cols-2 gap-10 p-10 md:p-12 rounded-3xl bg-white border border-ink/5 shadow-soft-lg">
+        <div>
+          <dt class="text-lg font-semibold text-lime">{t(lang, 'birthday.service_home_house')}</dt>
+          <dd class="mt-2 text-ink/80 leading-relaxed">{t(lang, 'birthday.service_home_house_desc')}</dd>
+        </div>
+        <div>
+          <dt class="text-lg font-semibold text-lime">{t(lang, 'birthday.service_house')}</dt>
+          <dd class="mt-2 text-ink/80 leading-relaxed">{t(lang, 'birthday.service_house_desc')}</dd>
+        </div>
+      </dl>
+    </div>
+    <div class="max-w-6xl mx-auto mt-20 px-4">
+      <Gallery photos={birthdayPhotos} lang={lang} />
+    </div>
+  </section>
+</BaseLayout>

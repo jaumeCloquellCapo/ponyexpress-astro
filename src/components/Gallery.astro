@@ -1,0 +1,39 @@
+---
+import { t, type Lang } from '../data/i18n';
+
+interface Photo { id: number; title: string | null; filename: string; location: string; }
+interface Props { photos: Photo[]; lang: Lang; }
+const { photos, lang } = Astro.props;
+const thumbPath = (filename: string) => filename.endsWith('.webp') ? `/images/${filename}` : `/images/thumbnails/${filename}`;
+
+function imageTitle(photo: Photo): string {
+  if (photo.title) return photo.title;
+  return lang === 'es' ? 'Ponis Pony Express Mallorca' : 'Pony Express Mallorca ponies';
+}
+
+function imageDescription(photo: Photo): string {
+  const title = imageTitle(photo);
+  const suffix = t(lang, 'gallery.image_alt_suffix');
+  return lang === 'es' ? `${title} en ${photo.location}. ${suffix}` : `${title} in ${photo.location}. ${suffix}`;
+}
+---
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+  {photos.map((photo) => {
+    const title = imageTitle(photo);
+    const description = imageDescription(photo);
+    return (
+      <figure class="group overflow-hidden rounded-2xl border border-ink/5 shadow-soft hover:shadow-soft-lg hover:border-lime/20 transition-all duration-300">
+        <img
+          class="object-cover h-64 w-full group-hover:scale-105 transition-transform duration-300"
+          src={thumbPath(photo.filename)}
+          alt={description}
+          title={title}
+          loading="lazy"
+          width="400"
+          height="256"
+        />
+        <figcaption class="sr-only">{description}</figcaption>
+      </figure>
+    );
+  })}
+</div>

@@ -1,0 +1,33 @@
+---
+import { t, type Lang } from '../data/i18n';
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const prefix = lang === 'en' ? '/en' : '';
+---
+<footer class="relative pt-24 pb-10 px-4 sm:px-6 lg:px-8 bg-ink text-white overflow-hidden">
+  <div class="absolute inset-0 bg-gradient-to-b from-turquoise/85 via-ink to-ink"></div>
+  <div class="absolute inset-0 bg-dots-light opacity-50" aria-hidden="true"></div>
+  <div class="relative z-10 max-w-6xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-14 md:gap-20 mb-14">
+      <div>
+        <a href={prefix || '/'} class="text-2xl md:text-3xl font-bold text-lime-light hover:text-white transition-colors">Pony Express Mallorca</a>
+        <p class="mt-4 text-white/85 text-lg">{t(lang, 'footer.tagline')}</p>
+      </div>
+      <div>
+        <p class="text-sm font-semibold text-lime-light/90 uppercase tracking-widest mb-5">Links</p>
+        <ul class="space-y-3 text-white/90 text-base">
+          <li><a href={`${prefix}/contact`} class="hover:text-sunny transition-colors">{t(lang, 'contact.title')}</a></li>
+          <li><a href={`${prefix}/birthday`} class="hover:text-sunny transition-colors">{t(lang, 'birthday.title')}</a></li>
+          <li class="pt-4">
+            <a href="https://www.facebook.com/ponyexpressmallorca/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-white/90 hover:text-sunny transition-colors" aria-label="Facebook Pony Express Mallorca">
+              <svg class="h-6 w-6" fill="currentColor" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"/></svg>
+              <span>{lang === 'es' ? 'Síguenos en Facebook' : 'Follow us on Facebook'}</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <hr class="border-white/15" />
+    <p class="mt-10 text-center text-white/60 text-sm">© {new Date().getFullYear()} Pony Express Mallorca</p>
+  </div>
+</footer>

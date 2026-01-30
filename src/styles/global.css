@@ -1,0 +1,58 @@
+@import "tailwindcss";
+
+/* Tipografía moderna */
+@theme {
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Paleta MÁS VIVA – energía, diversión, impacto sin caos */
+@theme {
+  --color-lime: #AEEA00;
+  --color-lime-light: #e6ff9e;
+  --color-turquoise: #26C6DA;
+  --color-turquoise-light: #b2ebf2;
+  --color-sunny: #FFEB3B;
+  --color-sunny-dark: #fbc02d;
+  --color-pink: #FF80AB;
+  --color-pink-dark: #f50057;
+  --color-coral: #FF7043;
+  --color-coral-dark: #e64a19;
+  --color-ink: #374151;
+  --color-ink-light: #6b7280;
+}
+
+/* Base suave y moderna */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-feature-settings: "ss01", "ss02";
+}
+
+/* Sombras suaves reutilizables */
+.shadow-soft {
+  box-shadow: 0 4px 24px -4px rgb(0 0 0 / 0.08), 0 8px 16px -6px rgb(0 0 0 / 0.04);
+}
+
+.shadow-soft-lg {
+  box-shadow: 0 12px 40px -8px rgb(0 0 0 / 0.12), 0 4px 16px -4px rgb(0 0 0 / 0.06);
+}
+
+/* Patrón sutil para fondos */
+.bg-dots {
+  background-image: radial-gradient(circle at 1px 1px, rgb(0 0 0 / 0.06) 1px, transparent 0);
+  background-size: 24px 24px;
+}
+
+.bg-dots-light {
+  background-image: radial-gradient(circle at 1px 1px, rgb(255 255 255 / 0.12) 1px, transparent 0);
+  background-size: 24px 24px;
+}
+
+/* Separador ondulado suave */
+.wave-divider {
+  height: 48px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 48' fill='none'%3E%3Cpath d='M0 48h1440V24s-180-24-360-24-360 24-720 24-360-24-360-24v24z' fill='%23fff'/%3E%3C/svg%3E") no-repeat bottom;
+  background-size: 100% 48px;
+}

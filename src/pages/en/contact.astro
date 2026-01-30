@@ -1,0 +1,22 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { t } from '../../data/i18n';
+
+const lang = 'en';
+const seo = { title: t(lang, 'seo.contact.title'), description: t(lang, 'seo.contact.description') };
+---
+<BaseLayout lang={lang} title={seo.title} description={seo.description} currentPath="/en/contact">
+  <section class="relative min-h-[80vh]">
+    <div class="absolute inset-0">
+      <iframe class="w-full h-full object-cover" width="100%" height="100%" frameborder="0" marginheight="0" marginwidth="0" title="map" scrolling="no" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12269.700790505562!2d3.1516558!3d39.7525608!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x4620b886cab2e65c!2sponyexpressmallorca!5e0!3m2!1sen!2ses!4v1620913968567!5m2!1sen!2ses" style="filter: grayscale(0.3) contrast(1.05) brightness(0.95);"></iframe>
+    </div>
+    <div class="absolute inset-0 bg-gradient-to-r from-white/95 via-transparent to-transparent md:via-white/80" aria-hidden="true"></div>
+    <div class="relative z-10 max-w-lg mx-auto px-4 py-24 md:py-32 flex justify-center md:justify-end md:pr-8 lg:pr-20">
+      <div class="w-full max-w-md p-10 rounded-3xl bg-white border border-ink/5 shadow-soft-lg">
+        <h1 class="text-2xl font-bold text-ink">{t(lang, 'contact.title')}</h1>
+        <p class="mt-3 text-ink/80 leading-relaxed">{t(lang, 'contact.subtitle')}</p>
+        <a href="tel:619861880" class="mt-8 inline-flex items-center justify-center w-full py-5 rounded-2xl font-semibold text-white bg-coral hover:bg-coral-dark shadow-soft hover:shadow-soft-lg transition-all text-lg">619 86 18 80</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,78 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import Testimonials from '../components/Testimonials.astro';
+import CallAction from '../components/CallAction.astro';
+import { t } from '../data/i18n';
+import { getWebSiteJsonLd } from '../data/structuredData';
+
+const lang = 'es';
+const testimonials = [
+  { id: 1, name: 'Justgoma K.', message: "A really beautiful finca and you don't have to be a pony professional to see that the owners care for and love their animals really well! I will definitely go there again with my son." },
+  { id: 2, name: 'Christian Piedrahita', message: "Experiencia increíble !! Para ir con la familia, Cristina y su familia son muy amables Y buenos anfitriones, nuestra hija no se quiere ir cuando está allí. Muchas Gracias pony express !!!" },
+];
+const seo = { title: t(lang, 'seo.home.title'), description: t(lang, 'seo.home.description') };
+const canonicalUrl = 'https://ponyexpressmallorca.com';
+const extraJsonLd = [getWebSiteJsonLd(lang, canonicalUrl)];
+---
+<BaseLayout lang={lang} title={seo.title} description={seo.description} currentPath="/" extraJsonLd={extraJsonLd}>
+  <Hero lang={lang} />
+  <section class="py-24 px-4 sm:px-6 lg:px-8 bg-white bg-dots">
+    <div class="max-w-6xl mx-auto">
+      <p class="text-sm font-semibold text-turquoise uppercase tracking-widest text-center mb-3">{t(lang, 'home.why_title')}</p>
+      <h2 class="text-3xl md:text-4xl font-bold text-ink text-center mb-16">{lang === 'es' ? 'Razones para elegirnos' : 'Reasons to choose us'}</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10">
+        <div class="group p-10 rounded-3xl bg-white border border-ink/5 shadow-soft hover:border-lime/40 hover:shadow-soft-lg hover:-translate-y-1 transition-all duration-300 text-center">
+          <div class="w-20 h-20 mx-auto rounded-2xl bg-lime/15 flex items-center justify-center text-4xl group-hover:scale-110 transition-transform">🐴</div>
+          <h3 class="mt-6 font-semibold text-ink text-xl">{t(lang, 'home.why_care')}</h3>
+          <p class="mt-3 text-ink/75 text-base leading-relaxed">{t(lang, 'home.why_care_desc')}</p>
+        </div>
+        <div class="group p-10 rounded-3xl bg-white border border-ink/5 shadow-soft hover:border-turquoise/40 hover:shadow-soft-lg hover:-translate-y-1 transition-all duration-300 text-center">
+          <div class="w-20 h-20 mx-auto rounded-2xl bg-turquoise/15 flex items-center justify-center text-4xl group-hover:scale-110 transition-transform">📍</div>
+          <h3 class="mt-6 font-semibold text-ink text-xl">{t(lang, 'home.why_flex')}</h3>
+          <p class="mt-3 text-ink/75 text-base leading-relaxed">{t(lang, 'home.why_flex_desc')}</p>
+        </div>
+        <div class="group p-10 rounded-3xl bg-white border border-ink/5 shadow-soft hover:border-sunny/50 hover:shadow-soft-lg hover:-translate-y-1 transition-all duration-300 text-center">
+          <div class="w-20 h-20 mx-auto rounded-2xl bg-sunny/20 flex items-center justify-center text-4xl group-hover:scale-110 transition-transform">✨</div>
+          <h3 class="mt-6 font-semibold text-ink text-xl">{t(lang, 'home.why_fam')}</h3>
+          <p class="mt-3 text-ink/75 text-base leading-relaxed">{t(lang, 'home.why_fam_desc')}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="py-28 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-turquoise/10 via-turquoise-light/30 to-white">
+    <div class="max-w-6xl mx-auto">
+      <p class="text-sm font-semibold text-turquoise uppercase tracking-widest text-center mb-3">{t(lang, 'home.our_services')}</p>
+      <h2 class="text-3xl md:text-4xl font-bold text-ink text-center">{lang === 'es' ? 'Servicios con ponis en Mallorca' : 'Pony services in Mallorca'}</h2>
+      <p class="mt-4 text-ink/80 text-center max-w-2xl mx-auto text-lg">{lang === 'es' ? 'Alquiler de ponis para cumpleaños, comuniones y eventos en Palma y toda Mallorca.' : 'Pony hire for birthdays, communions and events in Palma and across Majorca.'}</p>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-10 mt-16">
+        <a href="/birthday" class="group block p-8 rounded-3xl bg-white border border-ink/5 shadow-soft hover:shadow-soft-lg hover:-translate-y-2 hover:border-lime/20 transition-all duration-300 text-center">
+          <div class="w-20 h-20 mx-auto rounded-2xl bg-lime/10 flex items-center justify-center group-hover:scale-105 transition-transform">
+            <img src="/images/004-horse.png" alt={lang === 'es' ? 'Ponis para fiestas de cumpleaños en Mallorca' : 'Ponies for birthday parties in Mallorca'} class="w-14 h-14 object-contain" width="56" height="56" />
+          </div>
+          <h2 class="mt-5 text-xl font-semibold text-lime">{t(lang, 'home.party')}</h2>
+          <p class="mt-2 text-ink/80 text-sm leading-relaxed">{t(lang, 'home.party_desc')}</p>
+          <span class="mt-4 inline-flex items-center gap-1 text-coral font-semibold text-sm group-hover:gap-2 transition-all">{t(lang, 'home.know_more')} →</span>
+        </a>
+        <a href="/gallery" class="group block p-8 rounded-3xl bg-white border border-ink/5 shadow-soft hover:shadow-soft-lg hover:-translate-y-2 hover:border-lime/20 transition-all duration-300 text-center">
+          <div class="w-20 h-20 mx-auto rounded-2xl bg-turquoise/10 flex items-center justify-center group-hover:scale-105 transition-transform">
+            <img src="/images/011-horse.png" alt={lang === 'es' ? 'Ponis para primera comunión en Mallorca' : 'Ponies for first communion in Mallorca'} class="w-14 h-14 object-contain" width="56" height="56" />
+          </div>
+          <h2 class="mt-5 text-xl font-semibold text-lime">{t(lang, 'home.comunion')}</h2>
+          <p class="mt-2 text-ink/80 text-sm leading-relaxed">{t(lang, 'home.comunion_desc')}</p>
+          <span class="mt-4 inline-flex items-center gap-1 text-coral font-semibold text-sm group-hover:gap-2 transition-all">{t(lang, 'home.see_gallery')} →</span>
+        </a>
+        <a href="/gallery" class="group block p-8 rounded-3xl bg-white border border-ink/5 shadow-soft hover:shadow-soft-lg hover:-translate-y-2 hover:border-lime/20 transition-all duration-300 text-center">
+          <div class="w-20 h-20 mx-auto rounded-2xl bg-sunny/20 flex items-center justify-center group-hover:scale-105 transition-transform">
+            <img src="/images/005-horse.png" alt={lang === 'es' ? 'Ponis para eventos y celebraciones en Mallorca' : 'Ponies for events and celebrations in Mallorca'} class="w-14 h-14 object-contain" width="56" height="56" />
+          </div>
+          <h2 class="mt-5 text-xl font-semibold text-lime">{t(lang, 'home.others')}</h2>
+          <p class="mt-2 text-ink/80 text-sm leading-relaxed">{t(lang, 'home.others_desc')}</p>
+          <span class="mt-4 inline-flex items-center gap-1 text-coral font-semibold text-sm group-hover:gap-2 transition-all">{t(lang, 'home.see_gallery')} →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+  <Testimonials lang={lang} testimonials={testimonials} />
+  <CallAction lang={lang} />
+</BaseLayout>

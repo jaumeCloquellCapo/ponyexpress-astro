@@ -1,0 +1,42 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Gallery from '../components/Gallery.astro';
+import { t } from '../data/i18n';
+import { getGalleryJsonLd, SITE_URL, type GalleryImageEntry } from '../data/structuredData';
+import photos from '../data/photos.json';
+import birthdayPhotos from '../data/birthday.json';
+
+const lang = 'es';
+const allPhotos = [...photos, ...birthdayPhotos];
+const seo = { title: t(lang, 'seo.galeria.title'), description: t(lang, 'seo.galeria.description') };
+const canonicalUrl = `${SITE_URL}/gallery`;
+const thumbPath = (filename: string) => (filename?.endsWith('.webp') ? `/images/${filename}` : `/images/thumbnails/${filename}`);
+const imageTitle = (p: { title: string | null }) => p.title || (lang === 'es' ? 'Ponis Pony Express Mallorca' : 'Pony Express Mallorca ponies');
+const imageDescription = (p: { title: string | null; location: string }) => `${imageTitle(p)} ${lang === 'es' ? 'en' : 'in'} ${p.location}. ${t(lang, 'gallery.image_alt_suffix')}`;
+const imageEntries: GalleryImageEntry[] = allPhotos.map((p) => ({
+  url: `${SITE_URL}${thumbPath(p.filename)}`,
+  name: imageTitle(p),
+  description: imageDescription(p),
+}));
+const extraJsonLd = [getGalleryJsonLd(lang, canonicalUrl, imageEntries)];
+---
+<BaseLayout lang={lang} title={seo.title} description={seo.description} currentPath="/gallery" extraJsonLd={extraJsonLd}>
+  <section class="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-turquoise/10 to-white">
+    <div class="max-w-4xl mx-auto text-center">
+      <p class="text-sm font-semibold text-turquoise uppercase tracking-widest mb-3">{t(lang, 'gallery.subtitle')}</p>
+      <h1 class="text-4xl md:text-6xl font-bold text-ink tracking-tight leading-tight">
+        {t(lang, 'gallery.title')}<br /><span class="text-lime">Pony Express Mallorca</span>
+      </h1>
+    </div>
+  </section>
+  <section class="py-16 px-4 sm:px-6 lg:px-8 bg-white">
+    <div class="max-w-3xl mx-auto px-4 space-y-6 text-ink/80 leading-relaxed text-lg">
+      <p>{t(lang, 'gallery.intro_1')}</p>
+      <p>{t(lang, 'gallery.intro_2')}</p>
+      <p>{t(lang, 'gallery.intro_3')}</p>
+    </div>
+    <div class="max-w-6xl mx-auto mt-20 px-4">
+      <Gallery photos={allPhotos} lang={lang} />
+    </div>
+  </section>
+</BaseLayout>

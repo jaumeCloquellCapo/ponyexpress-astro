@@ -1,0 +1,65 @@
+---
+import '../styles/global.css';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import { Schema } from 'astro-seo-schema';
+import { Seo } from 'astro-seo-meta';
+import type { Lang } from '../data/i18n';
+import { baseBusiness } from '../data/structuredData';
+import type { Graph } from 'schema-dts';
+
+const SITE_URL = 'https://ponyexpressmallorca.com';
+
+interface Props {
+  lang: Lang;
+  title: string;
+  description?: string;
+  currentPath: string;
+  /** Esquemas JSON-LD adicionales por página (WebSite, ContactPage, Service, ImageGallery, etc.) */
+  extraJsonLd?: Record<string, unknown>[];
+}
+
+const { lang, title, description = '', currentPath, extraJsonLd = [] } = Astro.props;
+const htmlLang = lang === 'en' ? 'en' : 'es';
+const canonicalPath = currentPath === '/' ? '' : currentPath.endsWith('/') ? currentPath.slice(0, -1) : currentPath;
+const canonicalUrl = `${SITE_URL}${canonicalPath}`;
+const ogImage = new URL('/images/bk.jpeg', SITE_URL).href;
+
+const localBusinessLd = baseBusiness(lang);
+const allJsonLd: Graph[] = [localBusinessLd as Graph, ...(extraJsonLd as Graph[])];
+---
+<html lang={htmlLang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet" />
+    <Seo
+      title={title}
+      description={description}
+      icon="/images/logo.ico"
+      robots="index, follow"
+      facebook={{
+        image: ogImage,
+        url: canonicalUrl,
+        type: 'website',
+      }}
+    />
+    <link rel="canonical" href={canonicalUrl} />
+    <meta property="og:locale" content={htmlLang === 'en' ? 'en_GB' : 'es_ES'} />
+    <meta property="og:site_name" content="Pony Express Mallorca" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    {allJsonLd.map((data) => (
+      <Schema item={data} />
+    ))}
+  </head>
+  <body class="font-sans antialiased text-ink bg-white">
+    <Navbar lang={lang} currentPath={currentPath} />
+    <main>
+      <slot />
+    </main>
+    <Footer lang={lang} />
+  </body>
+</html>
