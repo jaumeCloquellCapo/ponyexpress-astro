@@ -17,6 +17,13 @@ const extraJsonLd = [getWebSiteJsonLd(lang, canonicalUrl)];
 ---
 <BaseLayout lang={lang} title={seo.title} description={seo.description} currentPath="/" extraJsonLd={extraJsonLd}>
   <Hero lang={lang} />
+  <section class="py-16 px-4 sm:px-6 lg:px-8 bg-white">
+    <div class="max-w-3xl mx-auto space-y-6 text-ink/85 leading-relaxed text-lg">
+      <p>{t(lang, 'home.intro_1')}</p>
+      <p>{t(lang, 'home.intro_2')}</p>
+      <p>{t(lang, 'home.intro_3')}</p>
+    </div>
+  </section>
   <section class="py-24 px-4 sm:px-6 lg:px-8 bg-white bg-dots">
     <div class="max-w-6xl mx-auto">
       <p class="text-sm font-semibold text-turquoise uppercase tracking-widest text-center mb-3">{t(lang, 'home.why_title')}</p>
