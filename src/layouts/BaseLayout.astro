@@ -50,7 +50,7 @@ const allJsonLd: Graph[] = [localBusinessLd as Graph, ...(extraJsonLd as Graph[]
     <meta property="og:locale" content={htmlLang === 'en' ? 'en_GB' : 'es_ES'} />
     <meta property="og:site_name" content="Pony Express Mallorca" />
     <meta name="generator" content={Astro.generator} />
-    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="sitemap" type="application/xml" href="https://ponyexpressmallorca.com/sitemap-index.xml" />
     {allJsonLd.map((data) => (
       <Schema item={data} />
     ))}
